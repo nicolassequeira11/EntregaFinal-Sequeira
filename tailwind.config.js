@@ -10,7 +10,8 @@ export default {
       colors:{
         myred: "#e50000",
         mywhite: "#f7f8f9",
-        myblack: "#333333"
+        myblack: "#333333",
+        mybg: "#f7f8f9"
       },
       fontFamily:{
         RobotoCondensed: ["Roboto Condensed", "sans-serif"]
