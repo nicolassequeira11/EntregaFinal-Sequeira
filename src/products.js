@@ -1,4 +1,4 @@
-const products = [
+export const products = [
   {
     id: 1,
     name: "KOALA - 16CM",
@@ -240,23 +240,3 @@ const products = [
     video: "",
   }
 ];
-
-export default products;
-
-export const getProducts = () => {
-  return new Promise((resolve) => {
-    resolve(products);
-  });
-};
-
-export const getProductsByCategory = (categoryId) => {
-  return new Promise((resolve) => {
-    resolve(products.filter((prod) => prod.category === categoryId));
-  });
-};
-
-export const getProductById = (itemId) => {
-  return new Promise((resolve) => {
-    resolve(products.find((prod) => prod.id === itemId));
-  });
-};

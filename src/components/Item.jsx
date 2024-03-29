@@ -6,7 +6,7 @@ export const Item = ({to, key, img1, img2, title, price, width}) => {
 
   return(
     <Link to={to} key={key} className={`${width} p-3 cursor-pointer`}>
-      <div className="">
+      <div className="min-w-[200px] rounded-b-xl">
         <img 
           src={isHovered ? img2 : img1} 
           onMouseOver={()=> setIsHovered(true)}

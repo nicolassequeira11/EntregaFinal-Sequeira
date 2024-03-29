@@ -13,6 +13,11 @@ export const Products = () => {
       "name": "Demon Slayer",
       "category": "DemonSlayer",
       "img": "https://i.ibb.co/pww5jHj/demon-slayer-logo.png"
+    },
+    {
+      "name": "Naruto",
+      "category": "Naruto",
+      "img": "https://i.ibb.co/VTz9rgw/naruto.png"
     }
   ]
 

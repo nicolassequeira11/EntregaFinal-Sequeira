@@ -1,6 +1,9 @@
-import React from "react";
+import { useContext } from 'react'
+import { CartContext } from '../context/CartContext'
 
 export const CartWidget = () => {
+  const { totalQuantity } = useContext(CartContext)
+
   return(
     <>
       <div className="mx-2">
@@ -19,7 +22,7 @@ export const CartWidget = () => {
         <span 
           className="bg-red-600 px-1 mx-2 my-auto rounded-full text-xs absolute top-12 ms-6 text-white"
         >
-          0
+          { totalQuantity }
           </span>
       </div>
     </>

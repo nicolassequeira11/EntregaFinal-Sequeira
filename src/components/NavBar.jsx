@@ -62,7 +62,7 @@ export const NavBar = () => {
                 />
               </svg>
             </Link> 
-            <Link className="flex my-auto hover:text-gray-200">
+            <Link to="/cart" className="flex my-auto hover:text-gray-200">
               <CartWidget />
             </Link>
           </div>
