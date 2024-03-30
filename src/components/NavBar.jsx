@@ -9,7 +9,7 @@ export const NavBar = () => {
 
   return(
     <header 
-      className="bg-black flex flex-col"
+      className="bg-black flex flex-col sticky top-0"
     >
       <div 
         className="flex max-md:w-11/12 w-full justify-around py-4 mx-auto"
