@@ -4,6 +4,6 @@ En un principio me base en la web que ellos tienen pero en algúnas cosas opte p
 
 En vez de utilizar un menu desplegable con las categorias en el navbar, decidí incluir un link de productos para redirigir al usuario a una pantalla con las categorias disponibles y así poder jugar un poco más a nivel visual y lograr un flujo.
 
-Instale gh-pages para poder visualizar la app en github pages y material icons para utilizar sus iconos.
+Instale material icons para utilizar sus iconos.
 
 <!-- Nicolás Sequeira -->
