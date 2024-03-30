@@ -43,7 +43,7 @@ export const ItemList = () => {
         className="max-md:object-cover max-md:h-[250px] max-md:object-right h-fit" 
       />
       <div className="my-10">
-        <h2 className="mx-auto flex justify-center text-center text-4xl font-bold">
+        <h2 className="mx-auto flex justify-center text-center px-3 text-4xl font-bold">
           PRODUCTOS DESTACADOS
         </h2>
         <div className="max-md:w-11/12 w-10/12 mt-4 mx-auto flex flex-wrap">
