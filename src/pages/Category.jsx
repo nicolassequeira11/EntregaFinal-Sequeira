@@ -1,50 +1,61 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../services/firebase/firebaseConfig";
-
 import { Item } from "../components/Item";
+import { LoadingContext } from "../context/LoadingContext";
+import { Footer } from "../components/Footer";
 
 export const Category = () => {
   const [products, setProducts] = useState([]);
+  const { loading, setLoading, loadingIndicator } = useContext(LoadingContext);
   const { categoryId } = useParams();
 
   useEffect(() => {
-    
-    const productsCollection = categoryId
-      ? query(collection(db, "products"), where("category", "==", categoryId))
-      : collection(db, "products")
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
 
-    getDocs(productsCollection)
-      .then(querySnapshot => {
-        const productsAdapted = querySnapshot.docs.map(doc => {
+        const productsCollection = categoryId
+          ? query(collection(db, "products"), where("category", "==", categoryId))
+          : collection(db, "products");
+
+        const querySnapshot = await getDocs(productsCollection);
+        const productsAdapted = querySnapshot.docs.map((doc) => {
           const data = doc.data();
-
-          return { id: doc.id, ...data }
-        })
+          return { id: doc.id, ...data };
+        });
 
         setProducts(productsAdapted);
-      })
-      .catch(error => {
+      } catch (error) {
         console.log(error);
-      })
-  }, [categoryId])
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return(
-    <div className="flex max-md:w-full w-10/12 mx-auto">
-      <div className="flex flex-wrap">
-        {products.map(item => (
-          <Item 
+    fetchProducts();
+  }, [categoryId]);
+
+  if (loading) {
+    return loadingIndicator;
+  }
+
+  return (
+    <div className="flex mt-10 mx-auto min-h-[100vh] flex-col justify-between">
+      <div className="flex flex-wrap justify-center mx-auto w-10/12">
+        {products.map((item) => (
+          <Item
             to={`/category/${item.category}/item/${item.id}/${item.name}`}
             key={item.id}
             img1={item.img[0]}
             img2={item.img[1]}
             title={item.name}
             price={item.price}
-            width="max-md:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
           />
         ))}
       </div>
+      <Footer />
     </div>
-  )
-}
+  );
+};

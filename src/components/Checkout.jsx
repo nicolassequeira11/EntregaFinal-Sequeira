@@ -2,10 +2,10 @@ import { useState, useContext, useRef } from "react";
 import { CartContext } from "../context/CartContext";
 import { getDocs, collection, query, where, documentId, writeBatch, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase/firebaseConfig";
+import { LoadingContext } from "../context/LoadingContext";
 
-export const Checkout = () => {
-  const [loading, setLoading] = useState(false);
-  const [orderId, setOrderId] = useState(null);
+export const Checkout = ({ orderId, setOrderId }) => {
+  const { loading, setLoading } = useContext(LoadingContext);
   const [dataUser, setDataUser] = useState({
     name: "",
     lastName: "",
@@ -15,13 +15,16 @@ export const Checkout = () => {
   const [formCheckout, setFormCheckout] = useState(false);
   const { cart, total, clearCart } = useContext(CartContext);
 
+  const totalFixed = total.toFixed(2);
   const nameRef = useRef(null);
   const lastNameRef = useRef(null);
   const phoneRef = useRef(null);
   const emailRef = useRef(null);
   const reemailRef = useRef(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     const nameInput = nameRef.current.value;
     const lastNameInput = lastNameRef.current.value;
     const phoneInput = phoneRef.current.value;
@@ -41,8 +44,6 @@ export const Checkout = () => {
     }
   };
 
-  console.log(dataUser);
-
   const createOrder = async ({name, lastname, phone, email}) => {
     try {
       setLoading(true);
@@ -55,7 +56,8 @@ export const Checkout = () => {
           email: email,
         },
         items: cart,
-        total,
+        date: new Date(),
+        totalFixed,
       };
 
       const batch = writeBatch(db);
@@ -99,40 +101,47 @@ export const Checkout = () => {
     }
   };
 
-  if (loading) {
+  if (loading && formCheckout) {
     return <h1>Su orden esta siendo generada...</h1>;
   }
 
   if (orderId) {
-    return <h1>El id de su orden es: {orderId}</h1>;
+    return (
+      <div className="mx-auto mt-6 text-center max-md:w-10/12 w-8/12 absolute left-0 right-0">
+        <p className="text-3xl xl:text-4xl font-semibold">¡Muchas gracias por su compra!</p>
+        <h1 className="mt-4 text-xl">El id de su orden es: {orderId}</h1>
+      </div>
+    );
   }
 
   return (
-    <div className="w-11/12 px-2 flex mx-auto flex-col mt-4">
-      <p className="text-2xl font-bold">Total: {total.toFixed(2)}€</p>
-      {formCheckout === false ? 
-        <div className="flex flex-col mt-1">
-          <input ref={nameRef} type="text" placeholder="Ingrese su nombre" 
+    <div className="w-11/12 px-5 bg-white h-fit flex mx-auto flex-col rounded-xl">
+      <p className="text-2xl mt-5  font-bold">Total: {total.toFixed(2)}€</p>
+      {!formCheckout ? 
+        <form className="flex flex-col mt-1" onSubmit={handleSubmit}>
+          <input ref={nameRef} type="text" placeholder="Ingrese su nombre" required
             className="my-1 px-2 py-2 focus:outline-none" 
           />
-          <input ref={lastNameRef} type="text" placeholder="Ingrese su apellido" 
+          <input ref={lastNameRef} type="text" placeholder="Ingrese su apellido" required
             className="my-1 px-2 py-2 focus:outline-none" 
           />
-          <input ref={phoneRef} type="text" placeholder="Ingrese su teléfono" 
+          <input ref={phoneRef} type="text" placeholder="Ingrese su teléfono" required
             className="my-1 px-2 py-2 focus:outline-none" 
           />
-          <input ref={emailRef} type="email" placeholder="Ingrese su email" 
+          <input ref={emailRef} type="email" placeholder="Ingrese su email" required
             className="my-1 px-2 py-2 focus:outline-none" 
           />
-          <input ref={reemailRef} type="email" placeholder="Reingrese su email" 
+          <input ref={reemailRef} type="email" placeholder="Reingrese su email" required
             className="my-1 px-2 py-2 focus:outline-none" 
           />
           <button 
-            onClick={handleSubmit}
-            className="bg-green-600 px-1 py-1 text-lg text-white my-3 rounded-xl">
+            type="submit"
+            className="bg-green-600 px-1 py-2 text-lg text-white my-4 rounded-xl 
+              hover:opacity-90 hover:shadow-lg"
+          >
               Continuar
           </button>
-        </div>
+        </form>
       : ""}
       {formCheckout === true ?
         <button 
@@ -142,7 +151,7 @@ export const Checkout = () => {
             phone: dataUser.phone,
             email: dataUser.email
           })} 
-          className="bg-myred px-3 py-3 mt-2 text-xl text-white"
+          className="bg-myred px-3 py-3 my-4 rounded-xl hover:shadow-md hover:opacity-90 text-xl text-white"
         >
           Generar orden de compras
         </button>

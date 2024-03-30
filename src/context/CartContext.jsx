@@ -32,7 +32,11 @@ export const CartProvider = ({ children }) => {
   }
 
   const getTotalQuantity = () => {
-    return cart.length;
+    if(cart.length <= 9) {
+      return cart.length;
+    } else {
+      return "9+";
+    }
   }
 
   const totalQuantity = getTotalQuantity()

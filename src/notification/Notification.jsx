@@ -11,13 +11,17 @@ const Notification = ({ notificacionData }) => {
     success: 'Correcto',
     error: 'Error',
     warning: 'Advertencia',
-    info: 'Informacion'
+    info: 'Información'
   }
 
   const notificationStyle = {
     position: 'absolute',
     top: 100,
-    right: 30,
+    right: 0,
+    left: 0,
+    width: "fit-content",
+    margin: "0 auto",
+    justifyContent: "justify-center",
     backgroundColor: colors[notificacionData.type],
     color: 'white',
     padding: 20,

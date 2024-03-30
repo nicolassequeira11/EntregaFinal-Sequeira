@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../public/logo.png";
 
-// Components
+// COMPONENTS
 import { CartWidget } from "./CartWidget";
 
 export const NavBar = () => {
@@ -12,7 +12,7 @@ export const NavBar = () => {
       className="bg-black flex flex-col"
     >
       <div 
-        className="flex max-md:w-11/12 w-8/12 justify-around py-4 mx-auto"
+        className="flex max-md:w-11/12 w-full justify-around py-4 mx-auto"
       >
 
         {/* Logo */}
@@ -22,29 +22,16 @@ export const NavBar = () => {
           <Link to="/">
             <img 
               src={Logo} 
-              className="object-contain max-md:h-8 h-14 m-auto" 
+              className="object-contain max-md:h-8 h-10 m-auto" 
             />
           </Link>
         </div>
 
-        {/* Search */}
-        <div 
-          className="max-md:w-4/12 w-2/4 my-auto flex text-white max-md:hidden"
-        >
-          <input 
-            className="
-              w-full mx-auto justify-between flex my-auto py-3 cursor-text 
-              bg-transparent border-b-2 border-white text-white text-xl focus:outline-none"
-            placeholder="Buscar"
-            type="text"
-          /> 
-        </div>
-
         {/* Icons */}
         <div 
-          className="max-md:w-8/12 w-1/4 flex text-white max-md:justify-end"
+          className="max-md:w-8/12 w-1/4 flex text-white justify-end"
         >
-          <Link to="/products" className="my-auto me-3 text-lg md:w-8/12 text-center">
+          <Link to="/products" className="hover:opacity-90 my-auto text-lg md:w-fit text-center max-md:me-3">
             Productos
           </Link>
           <div className="flex w-4/12 justify-center">

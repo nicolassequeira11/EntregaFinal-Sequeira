@@ -20,7 +20,7 @@ export const CartWidget = () => {
           />
         </svg>
         <span 
-          className="bg-red-600 px-1 mx-2 my-auto rounded-full text-xs absolute top-12 ms-6 text-white"
+          className="bg-red-600 px-1 mx-2 my-auto rounded-full text-xs absolute top-10 ms-6 text-white"
         >
           { totalQuantity }
           </span>

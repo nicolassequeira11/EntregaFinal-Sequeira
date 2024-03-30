@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext'
+import { LoadingProvider } from "./context/LoadingContext";
 import { NotificationProvider } from './notification/NotificationsService'
 
 // Components
@@ -19,32 +20,34 @@ function App() {
     <>
       <BrowserRouter>
         <NotificationProvider>
-          <CartProvider>
-            <NavBar  />
+          <LoadingProvider>
+            <CartProvider>
+              <NavBar  />
 
-            <Routes>
-              <Route 
-                path="/" 
-                element={<Home />} 
-              />
-              <Route 
-                path="/products" 
-                element={<Products />} 
-              />
-              <Route 
-                path="/category/:categoryId" 
-                element={<Category />} 
-              />
-              <Route 
-                path="/category/:categoryId/item/:itemId/:nameId" 
-                element={<Detail />} 
-              />
-              <Route 
-                path="/cart" 
-                element={<Cart />} 
-              />
-            </Routes>
-          </CartProvider>
+              <Routes>
+                <Route 
+                  path="/" 
+                  element={<Home />} 
+                />
+                <Route 
+                  path="/products" 
+                  element={<Products />} 
+                />
+                <Route 
+                  path="/category/:categoryId" 
+                  element={<Category />} 
+                />
+                <Route 
+                  path="/category/:categoryId/item/:itemId/:nameId" 
+                  element={<Detail />} 
+                />
+                <Route 
+                  path="/cart" 
+                  element={<Cart />} 
+                />
+              </Routes>
+            </CartProvider>
+          </LoadingProvider>
         </NotificationProvider>
       </BrowserRouter>
     </>

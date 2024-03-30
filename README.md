@@ -1,8 +1,9 @@
-# React + Vite
+Para el proyecto final de este curso decidí realizar un ecommerce de Banpresto, fabricantes de figuras de colección.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En un principio me base en la web que ellos tienen pero en algúnas cosas opte por darle mi estilo propio de diseño. Si bien no es algo demasiado elaborado, es sencillo, práctico y visualmente agradable.
 
-Currently, two official plugins are available:
+En vez de utilizar un menu desplegable con las categorias en el navbar, decidí incluir un link de productos para redirigir al usuario a una pantalla con las categorias disponibles y así poder jugar un poco más a nivel visual y lograr un flujo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Instale gh-pages para poder visualizar la app en github pages y material icons para utilizar sus iconos.
+
+<!-- Nicolás Sequeira -->
